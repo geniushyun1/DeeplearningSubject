@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K-Means Clustering 분석</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <div class="background-gradient"></div>
+
+    <main class="container">
+        <header class="header">
+            <h1>Data Clustering <br> <span class="highlight">Analysis</span></h1>
+            <p class="subtitle">Upload your dataset and visualize K-Means clustering with precision.</p>
+        </header>
+
+        <section class="control-panel">
+            <div class="upload-area" id="drop-zone">
+                <input type="file" id="file-input" accept=".csv" hidden>
+                <div class="upload-content">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 16V8M12 8L9 11M12 8L15 11" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M3 15V16C3 18.2091 4.79086 20 7 20H17C19.2091 20 21 18.2091 21 16V15"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <p>Drag & Drop CSV file here or <span class="clickable">Browse</span></p>
+                    <p class="file-name" id="file-name"></p>
+                </div>
+            </div>
+
+            <div class="settings-area">
+                <div class="k-control">
+                    <label for="k-value">Number of Clusters (K)</label>
+                    <div class="range-wrapper">
+                        <input type="range" id="k-value" min="2" max="10" value="3">
+                        <span id="k-display">3</span>
+                    </div>
+                </div>
+                <button id="analyze-btn" class="btn-primary">
+                    <span>Run Analysis</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <section class="visualization-area">
+            <div id="plot-container" class="plot-container">
+                <div class="placeholder-text">Visualization will appear here</div>
+            </div>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>
