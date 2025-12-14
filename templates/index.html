@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K-Means Clustering 분석</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <div class="background-gradient"></div>
+
+    <main class="container">
+        <header class="header">
+            <h1>데이터 클러스터링 <br> <span class="highlight">분석</span></h1>
+            <p class="subtitle">데이터셋을 업로드하고 K-Means 클러스터링 결과를 시각화해보세요.</p>
+        </header>
+
+        <section class="control-panel">
+            <div class="upload-area" id="drop-zone">
+                <input type="file" id="file-input" accept=".csv" hidden>
+                <div class="upload-content">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 16V8M12 8L9 11M12 8L15 11" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M3 15V16C3 18.2091 4.79086 20 7 20H17C19.2091 20 21 18.2091 21 16V15"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <p>CSV 파일을 이곳에 드래그하거나 <span class="clickable">클릭하여 선택</span></p>
+                    <p class="file-name" id="file-name"></p>
+                </div>
+            </div>
+
+            <div class="settings-area">
+                <div class="k-control">
+                    <label for="k-value">클러스터 개수 (K)</label>
+                    <div class="range-wrapper">
+                        <input type="range" id="k-value" min="2" max="10" value="3">
+                        <span id="k-display">3</span>
+                    </div>
+                </div>
+
+                <div id="feature-selection" class="feature-selection" style="display: none;">
+                    <h3>분석할 특성 선택</h3>
+                    <p class="section-desc">ID나 불필요한 숫자는 해제하면 정확도가 올라갑니다.</p>
+                    <div id="features-list" class="features-list">
+                        <!-- Checkboxes will be injected here -->
+                    </div>
+                </div>
+
+                <button id="analyze-btn" class="btn-primary" disabled>
+                    <span>분석 시작</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <section class="visualization-area">
+            <div id="plot-container" class="plot-container">
+                <div class="placeholder-text">시각화 결과가 여기에 표시됩니다</div>
+            </div>
+        </section>
+
+        <section class="analysis-details" id="analysis-details" style="display: none;">
+            <h2>클러스터 상세 분석</h2>
+            <div id="cluster-cards" class="cluster-cards">
+                <!-- Cluster details will be injected here -->
+            </div>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>
